@@ -31,7 +31,7 @@ const loginValidator = S.object()
 const signToken = async (res, payload) => {
   const token = await res.jwtSign(Object.assign({}, payload, { isRefresh: false }), { expiresIn: 3600 });
   await Redis.set(`jwt:${payload.user.id}`, token, 'EX', 3600);
-  return  token ;
+  return token;
 }
 
 /**
@@ -63,7 +63,7 @@ const registerHandler = async (req, res) => {
     }
   };
   const token = await signToken(res, payload);
-  return res.status(200).send({token});
+  return res.status(200).send({token, user:{id:user.id, username:user.username}});
 };
 
 
@@ -92,7 +92,7 @@ const loginHandler = async (req, res) => {
 
   const token = await signToken(res, payload);
 
-  return res.status(200).send({token});
+  return res.status(200).send({token, user:{id:user.id, username:user.username}});
 };
 /**
  * @param {import('fastify').FastifyInstance} fastify 
