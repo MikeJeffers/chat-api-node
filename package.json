@@ -1,0 +1,26 @@
+{
+  "name": "chat-api-node",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mike Jeffers",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^8.5.0",
+    "@fastify/formbody": "^7.4.0",
+    "@fastify/helmet": "^11.1.1",
+    "@fastify/jwt": "^8.0.0",
+    "@fastify/routes": "^5.1.0",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.3.1",
+    "fastify": "^4.25.2",
+    "fluent-json-schema": "^4.2.1",
+    "ioredis": "^5.3.2",
+    "moment": "2.29.4",
+    "postgres": "^3.4.3",
+    "uuid": "^9.0.1"
+  }
+}
