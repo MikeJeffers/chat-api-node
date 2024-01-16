@@ -63,7 +63,7 @@ const registerHandler = async (req, res) => {
     }
   };
   const token = await signToken(res, payload);
-  return res.status(200).send({token, user:{id:user.id, username:user.username}});
+  return res.status(200).send({ token, user: { id: user.id, username: user.username } });
 };
 
 
@@ -92,7 +92,7 @@ const loginHandler = async (req, res) => {
 
   const token = await signToken(res, payload);
 
-  return res.status(200).send({token, user:{id:user.id, username:user.username}});
+  return res.status(200).send({ token, user: { id: user.id, username: user.username } });
 };
 /**
  * @param {import('fastify').FastifyInstance} fastify 
