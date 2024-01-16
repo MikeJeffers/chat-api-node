@@ -76,12 +76,12 @@ const loginHandler = async (req, res) => {
   const { username, password } = req.body;
   let user = await USER.getByUsername(username);
   if (!user) {
-    throw { statusCode: 400, message: "Provided email and/or password is incorrect" }
+    throw { statusCode: 400, message: "Provided username and/or password is incorrect" }
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    throw { statusCode: 400, message: "Provided email and/or password is incorrect" }
+    throw { statusCode: 400, message: "Provided username and/or password is incorrect" }
   }
 
   const payload = {

@@ -4,7 +4,7 @@ module.exports = {
 
   rules: {
     'no-extra-parens': 2,
-    'no-unexpected-multiline': true,
+    'no-unexpected-multiline': 2,
     // All JSDoc comments must be valid
     'valid-jsdoc': [true, {
       requireReturn: false,
