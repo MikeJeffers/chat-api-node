@@ -29,7 +29,7 @@ const loginValidator = S.object()
  * @returns {Promise<string>} token
  */
 const signToken = async (res, payload) => {
-  const token = await res.jwtSign(Object.assign({}, payload, { isRefresh: false }), { expiresIn: 3600 });
+  const token = await res.jwtSign(Object.assign({}, payload, { isRefresh: false }), { expiresIn: 3600, algorithm: 'HS256' });
   await Redis.set(`jwt:${payload.user.id}`, token, 'EX', 3600);
   return token;
 }
