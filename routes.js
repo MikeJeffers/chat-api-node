@@ -25,12 +25,12 @@ const loginValidator = S.object()
 
 /**
  * @param {import('fastify').FastifyReply} res 
- * @param {Object} payload 
+ * @param {{"id":number,"username":string}} payload 
  * @returns {Promise<string>} token
  */
 const signToken = async (res, payload) => {
-  const token = await res.jwtSign(Object.assign({}, payload, { isRefresh: false }), { expiresIn: 3600, algorithm: 'HS256' });
-  await Redis.set(`jwt:${payload.user.id}`, token, 'EX', 3600);
+  const token = await res.jwtSign(Object.assign({}, payload), { expiresIn: 3600, algorithm: 'HS256' });
+  await Redis.set(`jwt:${payload.id}`, token, 'EX', 3600);
   return token;
 }
 
@@ -57,12 +57,7 @@ const registerHandler = async (req, res) => {
 
   const encryptedPwd = await hashPass(password);
   const user = await USER.createUser({ username, password: encryptedPwd });
-  const payload = {
-    user: {
-      id: user.id
-    }
-  };
-  const token = await signToken(res, payload);
+  const token = await signToken(res, { id: user.id, username: user.username });
   return res.status(200).send({ token, user: { id: user.id, username: user.username } });
 };
 
