@@ -78,16 +78,9 @@ const loginHandler = async (req, res) => {
   if (!isMatch) {
     throw { statusCode: 400, message: "Provided username and/or password is incorrect" }
   }
-
-  const payload = {
-    user: {
-      id: user.id
-    }
-  };
-
-  const token = await signToken(res, payload);
-
-  return res.status(200).send({ token, user: { id: user.id, username: user.username } });
+  const userPayload = { id: user.id, username: user.username };
+  const token = await signToken(res, userPayload);
+  return res.status(200).send({ token, user:userPayload });
 };
 /**
  * @param {import('fastify').FastifyInstance} fastify 
