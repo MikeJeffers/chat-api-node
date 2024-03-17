@@ -1,5 +1,5 @@
 //@ts-check
-require('./preload');
+require('../utils/preload');
 const postgres = require('postgres');
 
 const SQL = postgres({

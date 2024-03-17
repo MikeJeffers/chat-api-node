@@ -1,6 +1,6 @@
 //@ts-check 
-require('./preload');
-const app = require('./app');
+require('./utils/preload');
+const app = require('./api/app');
 
 if (require.main === module) {
   const start = async () => {

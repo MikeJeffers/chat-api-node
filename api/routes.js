@@ -1,8 +1,8 @@
 //@ts-check
 const S = require('fluent-json-schema').default;
 const bcrypt = require('bcrypt');
-const Redis = require('./redis');
-const USER = require('./user');
+const Redis = require('../redis');
+const USER = require('../db/user');
 
 /**
  * @typedef {import('fastify').FastifyRequest} Request
@@ -58,7 +58,7 @@ const registerHandler = async (req, res) => {
   const encryptedPwd = await hashPass(password);
   const user = await USER.createUser({ username, password: encryptedPwd });
   const token = await signToken(res, { id: user.id, username: user.username });
-  return res.status(200).send({ token, user: { id: user.id, username: user.username } });
+  return res.status(201).send({ token, user: { id: user.id, username: user.username } });
 };
 
 
@@ -80,7 +80,7 @@ const loginHandler = async (req, res) => {
   }
   const userPayload = { id: user.id, username: user.username };
   const token = await signToken(res, userPayload);
-  return res.status(200).send({ token, user:userPayload });
+  return res.status(200).send({ token, user: userPayload });
 };
 /**
  * @param {import('fastify').FastifyInstance} fastify 

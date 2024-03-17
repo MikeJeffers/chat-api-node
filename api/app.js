@@ -5,7 +5,7 @@ const jwt = require('@fastify/jwt');
 const helmet = require('@fastify/helmet').default;
 const fastifyFormBody = require('@fastify/formbody').default;
 const routes = require('./routes');
-const UserError = require('./userError');
+const UserError = require('../utils/userError');
 const app = Fastify({ logger: true });
 
 module.exports = async () => {
